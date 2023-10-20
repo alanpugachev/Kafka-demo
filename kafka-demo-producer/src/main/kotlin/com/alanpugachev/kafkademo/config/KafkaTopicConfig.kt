@@ -15,13 +15,6 @@ class KafkaTopicConfig {
     lateinit var bootstrapServers: String
 
     @Bean
-    fun kafkaAdmin(): KafkaAdmin {
-        var configs: HashMap<String, Any> = HashMap()
-        configs[AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapServers
-        return KafkaAdmin(configs)
-    }
-
-    @Bean
     fun demoTopic(): NewTopic {
         return TopicBuilder.name("demo_topic")
             .build()

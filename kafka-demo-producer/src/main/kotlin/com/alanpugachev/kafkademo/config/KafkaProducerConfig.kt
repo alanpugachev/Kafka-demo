@@ -17,7 +17,7 @@ class KafkaProducerConfig {
     lateinit var bootstrapServers: String
 
     @Bean
-    fun producerFactory(producerConfig: HashMap<String, String> ): ProducerFactory<String, String> {
+    fun producerFactory(producerConfig: HashMap<String, String> ): ProducerFactory<String, Any> {
         return DefaultKafkaProducerFactory(
             mapOf(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
@@ -32,8 +32,8 @@ class KafkaProducerConfig {
 
     @Bean
     fun kafkaTemplate(
-        producerFactory: ProducerFactory<String, String>
-    ): KafkaTemplate<String, String> {
+        producerFactory: ProducerFactory<String, Any>
+    ): KafkaTemplate<String, Any> {
         return KafkaTemplate(producerFactory)
     }
 }
