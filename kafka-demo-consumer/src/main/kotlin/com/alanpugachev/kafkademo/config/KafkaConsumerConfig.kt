@@ -1,5 +1,7 @@
 package com.alanpugachev.kafkademo.config
 
+import com.alanpugachev.kafkademo.dto.MessageDto
+import com.alanpugachev.kafkademo.serialize.MessageDeserializer
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.clients.producer.ProducerConfig
@@ -29,6 +31,17 @@ class KafkaConsumerConfig {
         props[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
 
         return DefaultKafkaConsumerFactory(props)
+    }
+
+    @Bean
+    fun createKafkaConsumer(): KafkaConsumer<String, MessageDto> {
+        return KafkaConsumer(
+            mapOf(
+                ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
+                ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
+                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to MessageDeserializer::class
+            )
+        )
     }
 
     @Bean

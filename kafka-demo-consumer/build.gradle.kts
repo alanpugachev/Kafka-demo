@@ -25,6 +25,7 @@ dependencies {
 	implementation("org.springframework.kafka:spring-kafka")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.kafka:spring-kafka-test")
+	compileOnly("org.projectlombok:lombok:1.18.30")
 }
 
 tasks.withType<KotlinCompile> {

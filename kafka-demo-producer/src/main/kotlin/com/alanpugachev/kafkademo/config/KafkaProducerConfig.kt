@@ -1,5 +1,8 @@
 package com.alanpugachev.kafkademo.config
 
+import com.alanpugachev.kafkademo.dto.MessageDto
+import com.alanpugachev.kafkademo.serialize.MessageSerializer
+import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.StringSerializer
 import org.springframework.beans.factory.annotation.Value
@@ -26,6 +29,18 @@ class KafkaProducerConfig {
                 ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG to 500,
                 ProducerConfig.ACKS_CONFIG to "all",
                 ProducerConfig.RETRIES_CONFIG to 2,
+            )
+        )
+    }
+
+    @Bean
+    fun createKafkaProducer(): KafkaProducer<String, MessageDto> {
+        return KafkaProducer(
+            mapOf(
+                ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
+                ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG to StringSerializer::class.java,
+                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG to MessageSerializer::class,
+                ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG to 500
             )
         )
     }
