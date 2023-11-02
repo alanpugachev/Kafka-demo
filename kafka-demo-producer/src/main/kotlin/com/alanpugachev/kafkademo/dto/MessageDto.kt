@@ -5,11 +5,7 @@ import lombok.Builder
 import lombok.Data
 import lombok.NoArgsConstructor
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-class MessageDto {
-    lateinit var message: String
+data class MessageDto(
+    var message: String = "",
     var id: String = (0..1000000).random().toString()
-}
+)
