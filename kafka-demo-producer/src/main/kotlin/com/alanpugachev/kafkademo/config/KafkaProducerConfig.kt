@@ -16,8 +16,9 @@ import org.springframework.kafka.core.ProducerFactory
 @Configuration
 class KafkaProducerConfig {
 
-    @Value("\${spring.kafka.bootstrap-servers}")
-    lateinit var bootstrapServers: String
+    //@Value("\${spring.kafka.bootstrap-servers}")
+    //lateinit var bootstrapServers: String
+    val bootstrapServers = "localhost:9092"
 
     @Bean
     fun producerFactory(producerConfig: HashMap<String, String> ): ProducerFactory<String, Any> {
@@ -39,7 +40,7 @@ class KafkaProducerConfig {
             mapOf(
                 ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
                 ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG to StringSerializer::class.java,
-                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG to MessageSerializer::class,
+                ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG to MessageSerializer::class.java,
                 ProducerConfig.REQUEST_TIMEOUT_MS_CONFIG to 500
             )
         )
