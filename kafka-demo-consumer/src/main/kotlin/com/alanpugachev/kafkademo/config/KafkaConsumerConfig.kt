@@ -20,8 +20,9 @@ import kotlin.collections.HashMap
 
 @Configuration
 class KafkaConsumerConfig {
-    @Value("\${spring.kafka.bootstrap-servers}")
-    lateinit var bootstrapServers: String
+    //@Value("\${spring.kafka.bootstrap-servers}")
+    //lateinit var bootstrapServers: String
+    val bootstrapServers = "localhost:9092"
 
     @Bean
     fun consumerFactory(): ConsumerFactory<String, String> {
@@ -39,7 +40,7 @@ class KafkaConsumerConfig {
             mapOf(
                 ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
                 ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
-                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to MessageDeserializer::class
+                ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to MessageDeserializer::class.java
             )
         )
     }

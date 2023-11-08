@@ -38,7 +38,7 @@ class KafkaProducerEntity() {
     @Bean
     fun sendKafkaMessage() {
         producer.send(ProducerRecord<String, MessageDto>("demo_topic", "1", msgProd))
-        println("Message sent $msgProd")
+        println("\nMessage sent $msgProd \n")
         producer.close()
     }
 }
